@@ -14,27 +14,28 @@ class ChargeCardRequest {
   String txRef;
   String redirectUrl;
   String country;
+  String paymentPlan;
   Authorization authorization;
 
   /// ChargeCardRequest constructor
-  ChargeCardRequest({
-    @required this.cardNumber,
-    @required this.cvv,
-    @required this.expiryMonth,
-    @required this.expiryYear,
-    @required this.currency,
-    @required this.amount,
-    @required this.email,
-    @required this.fullName,
-    @required this.txRef,
-    this.country,
-    this.redirectUrl = FlutterwaveURLS.DEFAULT_REDIRECT_URL,
-    this.authorization
-  });
+  ChargeCardRequest(
+      {@required this.cardNumber,
+      @required this.cvv,
+      @required this.expiryMonth,
+      @required this.expiryYear,
+      @required this.currency,
+      @required this.amount,
+      @required this.email,
+      @required this.fullName,
+      @required this.txRef,
+      this.country,
+      this.paymentPlan,
+      this.redirectUrl = FlutterwaveURLS.DEFAULT_REDIRECT_URL,
+      this.authorization});
 
   /// Converts ChargeCardRequest instance to a map
   Map<String, dynamic> toJson() {
-    return {
+    var data = {
       "card_number": this.cardNumber,
       "cvv": this.cvv,
       "expiry_month": this.expiryMonth,
@@ -50,5 +51,11 @@ class ChargeCardRequest {
           ? Authorization().toJson()
           : this.authorization.toJson()
     };
+
+    if (paymentPlan != null) {
+      data["paymentPlan"] = paymentPlan;
+    }
+
+    return data;
   }
 }

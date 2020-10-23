@@ -30,6 +30,7 @@ class Flutterwave {
   int duration;
   bool isPermanent;
   String narration;
+  String paymentPlan;
 
   //todo include these when they become available and stable on v3
   // bool acceptVoucherPayment;
@@ -37,7 +38,6 @@ class Flutterwave {
   // bool acceptBarterPayment;
   // bool acceptSouthAfricaBankPayment;
   // bool acceptBankTransferPayment;
-
 
   /// Flutterwave Constructor
   Flutterwave.forUIPayment({
@@ -51,6 +51,7 @@ class Flutterwave {
     @required this.txRef,
     @required this.isDebugMode,
     @required this.phoneNumber,
+    this.paymentPlan,
     this.frequency,
     this.duration = 0,
     this.isPermanent = false,
@@ -151,7 +152,6 @@ class Flutterwave {
       this.acceptUSSDPayment = false;
     }
 
-
     //TODO to be included once UK Account payments and ACH become available on v3
     // if (this.currency == FlutterwaveCurrency.GBP) {
     //   // this.acceptUKAccountPayment = true;
@@ -202,7 +202,6 @@ class Flutterwave {
     }
   }
 
-
   /// Launches payment screen
   /// Returns a future ChargeResponse intance
   /// Nullable
@@ -230,6 +229,7 @@ class Flutterwave {
         acceptGhanaPayment: this.acceptGhanaPayment,
         acceptUgandaPayment: this.acceptUgandaPayment,
         acceptFancophoneMobileMoney: this.acceptFrancophoneMobileMoney,
+        paymentPlan: this.paymentPlan,
         country: this._setCountry());
 
     final chargeResponse = await this._launchPaymentScreen(paymentManager);

@@ -37,7 +37,7 @@ class FlutterwavePaymentManager {
   bool acceptFancophoneMobileMoney;
   bool acceptVoucherPayment;
   String country;
-
+  String paymentPlan;
 
   /// FlutterwavePaymentManager Constructor
   FlutterwavePaymentManager(
@@ -67,6 +67,7 @@ class FlutterwavePaymentManager {
       this.acceptVoucherPayment = false,
       this.frequency,
       this.duration,
+      this.paymentPlan,
       this.isPermanent,
       this.narration,
       this.network = ""});
@@ -87,6 +88,7 @@ class FlutterwavePaymentManager {
         phoneNumber: this.phoneNumber,
         frequency: this.frequency,
         country: this.country,
+        paymentPlan: paymentPlan,
         duration: this.duration);
   }
 

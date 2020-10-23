@@ -202,6 +202,7 @@ class _CardPaymentState extends State<CardPayment>
         email: this.widget._paymentManager.email.trim(),
         fullName: this.widget._paymentManager.fullName.trim(),
         txRef: this.widget._paymentManager.txRef.trim(),
+        paymentPlan: this.widget._paymentManager.paymentPlan,
         country: this.widget._paymentManager.country);
     final client = http.Client();
     this

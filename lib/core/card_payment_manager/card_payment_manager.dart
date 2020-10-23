@@ -28,6 +28,7 @@ class CardPaymentManager {
   bool isPermanent;
   String narration;
   String country;
+  String paymentPlan;
 
   ChargeCardRequest chargeCardRequest;
   CardPaymentListener cardPaymentListener;
@@ -43,6 +44,7 @@ class CardPaymentManager {
     @required this.txRef,
     @required this.isDebugMode,
     this.country,
+    this.paymentPlan,
     this.phoneNumber,
     this.frequency,
     this.duration,
@@ -69,7 +71,6 @@ class CardPaymentManager {
   /// Initiates Card Request
   Future<dynamic> payWithCard(final http.Client client,
       final ChargeCardRequest chargeCardRequest) async {
-
     this.chargeCardRequest = chargeCardRequest;
     if (this.cardPaymentListener == null) {
       this.cardPaymentListener.onError("No CardPaymentListener Attached!");
@@ -102,7 +103,7 @@ class CardPaymentManager {
                 (responseBody.meta.authorization.mode != null);
 
         final bool is3DS = (responseBody.message ==
-            FlutterwaveConstants.CHARGE_INITIATED) &&
+                FlutterwaveConstants.CHARGE_INITIATED) &&
             (responseBody.meta.authorization.mode == Authorization.REDIRECT);
 
         final bool requiresOtp =
